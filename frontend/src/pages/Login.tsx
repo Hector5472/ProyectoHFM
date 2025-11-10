@@ -1,35 +1,82 @@
-import { Button, Container, Typography } from "@mui/material";
+import { Alert, Box, Button, TextField, Typography } from "@mui/material";
+import LockIcon from "@mui/icons-material/Lock";
+import { useState } from "react";
 
 export default function Login() {
+    const bduser = "Héctor";
+    const bdpasswd = "merequetenge";
+
+    const [user, setUser] = useState("");
+    const [passwd, setPasswd] = useState("");
+    const [alerta, setAlerta] = useState<{ tipo: "success" | "error" | ""; mensaje: string }>({
+        tipo: "",
+        mensaje: "",
+    });
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+
+        if (bduser === user && bdpasswd === passwd) {
+            setAlerta({ tipo: "success", mensaje: "Acceso concedido" });
+        } else {
+            setAlerta({ tipo: "error", mensaje: "Usuario o contraseña incorrectos" });
+        }
+    };
+
     return (
         <>
             <header>
-                <Typography variant="h1">Página Login de Héctor Fleitas Martín</Typography>
+                <Typography variant="h4" align="center">
+                    Página Login de Héctor Fleitas Martín
+                </Typography>
             </header>
+
             <main>
-                <Container>
-                    <Typography variant="h1" color="primary">Ejemplo H1</Typography>
-                    <Typography variant="h2" color="secondary">Ejemplo H2</Typography>
-                    <Typography variant="h3" color="error">Ejemplo H3</Typography>
-                    <Typography variant="subtitle1">Subtítulo ejemplo</Typography>
-                    <Typography variant="body1">Texto de ejemplo para el body1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Typography>
-                    <Typography variant="caption">Texto de ejemplo para el caption.</Typography>
-                </Container>
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 2
+                    }}
+                >
+                    <Typography variant="h5" color="primary" align="center">
+                        Sistema de acceso
+                    </Typography>
+                    <LockIcon sx={{ alignSelf: "center" }} />
+
+                    <TextField
+                        label="Usuario"
+                        variant="outlined"
+                        required
+                        fullWidth
+                        value={user}
+                        onChange={(e) => setUser(e.target.value)}
+                    />
+
+                    <TextField
+                        label="Contraseña"
+                        variant="outlined"
+                        type="password"
+                        required
+                        fullWidth
+                        value={passwd}
+                        onChange={(e) => setPasswd(e.target.value)}
+                    />
+
+                    <Button variant="contained" fullWidth type="submit">
+                        Acceder
+                    </Button>
+
+
+                    {alerta.tipo && (
+                        <Alert severity={alerta.tipo}>
+                            {alerta.mensaje}
+                        </Alert>
+                    )}
+                </Box>
             </main>
-            
-            <footer>
-                <Container>
-                    <Button variant="text" color="primary">Botón Texto</Button>
-                    <Button variant="contained" color="primary">Botón Contenido</Button>
-                    <Button variant="outlined" color="primary">Botón Contorneado</Button>
-                    <br />
-                    <Button variant="contained" color="primary">Botón Primario</Button>
-                    <Button variant="contained" color="secondary">Botón Secundario</Button>
-                    <Button variant="contained" color="error">Botón Error</Button>
-                    <Button variant="contained" color="success">Botón Éxito</Button>
-                    <Button variant="contained" color="warning">Botón Advertencia</Button>
-                </Container>
-            </footer>
         </>
     );
 }
