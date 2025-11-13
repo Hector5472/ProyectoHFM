@@ -16,6 +16,9 @@ export default function Login() {
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
+        console.log("Usuario introducido:", user);
+        console.log("Contraseña introducida:", passwd);
+
         if (bduser === user && bdpasswd === passwd) {
             setAlerta({ tipo: "success", mensaje: "Acceso concedido" });
         } else {
