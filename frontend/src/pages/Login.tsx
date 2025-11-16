@@ -2,10 +2,13 @@ import { Alert, Box, Button, TextField, Typography } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "../store/authSlice";
 
 
 
 export default function Login() {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const bduser = "Héctor";
     const bdpasswd = "merequetenge";
@@ -25,6 +28,10 @@ export default function Login() {
 
         if (bduser === user && bdpasswd === passwd) {
             // setAlerta({ tipo: "success", mensaje: "Acceso concedido" });
+            dispatch(authActions.login({ 
+                name: user, 
+                rol: "administrador" 
+            }));
             navigate("/home");
         } else {
             setAlerta({ tipo: "error", mensaje: "Usuario o contraseña incorrectos" });
