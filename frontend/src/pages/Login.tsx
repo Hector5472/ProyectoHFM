@@ -1,8 +1,12 @@
 import { Alert, Box, Button, TextField, Typography } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function Login() {
+    const navigate = useNavigate();
     const bduser = "Héctor";
     const bdpasswd = "merequetenge";
 
@@ -20,7 +24,8 @@ export default function Login() {
         console.log("Contraseña introducida:", passwd);
 
         if (bduser === user && bdpasswd === passwd) {
-            setAlerta({ tipo: "success", mensaje: "Acceso concedido" });
+            // setAlerta({ tipo: "success", mensaje: "Acceso concedido" });
+            navigate("/home");
         } else {
             setAlerta({ tipo: "error", mensaje: "Usuario o contraseña incorrectos" });
         }
