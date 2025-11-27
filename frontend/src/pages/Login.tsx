@@ -10,8 +10,29 @@ import { authActions } from "../store/authSlice";
 export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const bduser = "Héctor";
-    const bdpasswd = "merequetenge";
+
+    async function isVerifiedUser() {
+        fetch(`http://localhost:3030/login?user=${user}&password=${passwd}`)
+            .then(response => response.json())
+            .then(response => {
+                console.log('Lo que nos llega de la base de datos: ')
+                console.log(response.data)
+                if (response.data.length !== 0) {
+
+                    dispatch(
+                        authActions.login({
+                            name: response.nombre,
+                            rol: response.rol
+                        })
+                    );
+
+                    navigate("/home");
+
+                } else {
+                    setAlerta({ tipo: "error", mensaje: "Usuario o contraseña incorrectos" });
+                }
+            })
+    }
 
     const [user, setUser] = useState("");
     const [passwd, setPasswd] = useState("");
@@ -22,20 +43,7 @@ export default function Login() {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-
-        console.log("Usuario introducido:", user);
-        console.log("Contraseña introducida:", passwd);
-
-        if (bduser === user && bdpasswd === passwd) {
-            // setAlerta({ tipo: "success", mensaje: "Acceso concedido" });
-            dispatch(authActions.login({ 
-                name: user, 
-                rol: "administrador" 
-            }));
-            navigate("/home");
-        } else {
-            setAlerta({ tipo: "error", mensaje: "Usuario o contraseña incorrectos" });
-        }
+        isVerifiedUser();
     };
 
     return (
