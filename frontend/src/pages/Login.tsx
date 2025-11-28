@@ -10,6 +10,12 @@ import { authActions } from "../store/authSlice";
 export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [user, setUser] = useState("");
+    const [passwd, setPasswd] = useState("");
+    const [alerta, setAlerta] = useState<{ tipo: "success" | "error" | ""; mensaje: string }>({
+        tipo: "",
+        mensaje: "",
+    });
 
     async function isVerifiedUser() {
         fetch(`http://localhost:3030/login?user=${user}&password=${passwd}`)
@@ -21,8 +27,8 @@ export default function Login() {
 
                     dispatch(
                         authActions.login({
-                            name: response.nombre,
-                            rol: response.rol
+                            name: response.data.nombre,
+                            rol: response.data.rol
                         })
                     );
 
@@ -34,12 +40,6 @@ export default function Login() {
             })
     }
 
-    const [user, setUser] = useState("");
-    const [passwd, setPasswd] = useState("");
-    const [alerta, setAlerta] = useState<{ tipo: "success" | "error" | ""; mensaje: string }>({
-        tipo: "",
-        mensaje: "",
-    });
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
