@@ -1,3 +1,10 @@
+import Menu from "../components/Menu";
+
 export default function Reports() {
-  return <h1>Esta es la página de reportes</h1>
+  return (
+    <>
+      <Menu />
+      <h1>Esta es la página de reportes</h1>
+    </>
+  );
 }

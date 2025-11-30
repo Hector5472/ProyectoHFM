@@ -39,6 +39,39 @@ app.get('/login', async function(req, res, next) {
     }
 })
 
+const items = require('./services/items');
+
+// INSERTAR
+app.get('/addItem', async function (req, res, next) {
+    try {
+        res.json(await items.insertData(req, res));
+    } catch (err) {
+        console.error('Error while inserting item', err.message);
+        next(err);
+    }
+});
+
+// OBTENER DATOS
+app.get('/getItems', async function (req, res, next) {
+    try {
+        res.json(await items.getData(req, res));
+    } catch (err) {
+        console.error('Error while getting items', err.message);
+        next(err);
+    }
+});
+
+// BORRAR
+app.get('/deleteItem', async function (req, res, next) {
+    try {
+        res.json(await items.deleteData(req, res));
+    } catch (err) {
+        console.error('Error while deleting item', err.message);
+        next(err);
+    }
+});
+
+
 //Iniciamos la API
 app.listen(port)
 console.log('API escuchando en el puerto ' + port)

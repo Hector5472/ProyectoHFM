@@ -25,7 +25,7 @@ export default function Menu() {
         navigate("/");
     };
 
-    // Evita entrar a /home o /reports sin estar autenticado
+    // Evita entrar sin estar autenticado
     useEffect(() => {
         if (!userData.isAutenticated){
             navigate("/");
@@ -36,7 +36,7 @@ export default function Menu() {
         <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
             <List>
 
-                {/* Enlace a Home */}
+                
                 <Link to="/home" style={{textDecoration: "none", color: "white" }}>
                     <ListItem disablePadding>
                         <ListItemButton>
@@ -48,7 +48,7 @@ export default function Menu() {
                     </ListItem>
                 </Link>
 
-                {/* Enlace a Reports */}
+                
                 <Link to="/reports" style={{textDecoration: "none", color: "white" }}>
                     <ListItem disablePadding>
                         <ListItemButton>
@@ -60,7 +60,7 @@ export default function Menu() {
                     </ListItem>
                 </Link>
 
-                {/* Logout */}
+                
                 <ListItem disablePadding onClick={handleLogout}>
                     <ListItemButton>
                         <ListItemIcon>
