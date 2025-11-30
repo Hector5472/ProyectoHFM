@@ -88,9 +88,9 @@ export default function Dashboard() {
                 onSubmit={handleSubmit}
                 style={{
                     display: "flex",
-                    flexDirection: "column",
+                    flexDirection: "row",
                     gap: "15px",
-                    maxWidth: "400px",
+                    maxWidth: "100%",
                     marginBottom: "40px"
                 }}
             >
