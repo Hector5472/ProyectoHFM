@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/index";
 import { authActions } from "../store/authSlice";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 export default function Menu() {
     const [open, setOpen] = useState(false);
@@ -97,7 +98,7 @@ export default function Menu() {
                     <AccountCircleIcon fontSize="large" />
                     )}
                     {userData.userRol === "admin" && (
-                    <AccountCircleIcon fontSize="large" color="secondary" />
+                    <AdminPanelSettingsIcon fontSize="large" color="secondary" />
                     )}
                 </Toolbar>
             </AppBar>
