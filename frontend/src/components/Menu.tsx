@@ -48,7 +48,8 @@ export default function Menu() {
                     </ListItem>
                 </Link>
 
-                
+                {/* sólo cuando el rol sea admin se muestra Informes */}
+                {userData.userRol === "admin" && (
                 <Link to="/reports" style={{textDecoration: "none", color: "white" }}>
                     <ListItem disablePadding>
                         <ListItemButton>
@@ -59,6 +60,7 @@ export default function Menu() {
                         </ListItemButton>
                     </ListItem>
                 </Link>
+                )}
 
                 
                 <ListItem disablePadding onClick={handleLogout}>
