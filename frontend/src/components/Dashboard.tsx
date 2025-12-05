@@ -12,6 +12,8 @@ import {
     Paper
 } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/index";
 
 interface itemtype {
     id?: number;
@@ -31,6 +33,7 @@ const itemInitialState: itemtype = {
 export default function Dashboard() {
     const [item, setItem] = useState<itemtype>(itemInitialState);
     const [tableData, setTableData] = useState<itemtype[]>([]);
+    const userData = useSelector((state: RootState) => state.authentication);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -137,7 +140,9 @@ export default function Dashboard() {
                 <Table aria-label="tabla coleccion">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Borrar</TableCell>
+                            {userData.userRol === "admin" && (
+                                <TableCell>Borrar</TableCell>
+                            )}
                             <TableCell>ID</TableCell>
                             <TableCell>Nombre</TableCell>
                             <TableCell>Marca</TableCell>
@@ -149,6 +154,7 @@ export default function Dashboard() {
                     <TableBody>
                         {tableData.map((row: itemtype) => (
                             <TableRow key={row.id}>
+                                {userData.userRol === "admin" && (
                                 <TableCell>
                                     <Button
                                         color="error"
@@ -157,6 +163,7 @@ export default function Dashboard() {
                                         <DeleteForeverIcon />
                                     </Button>
                                 </TableCell>
+                                )}
 
                                 <TableCell>{row.id}</TableCell>
                                 <TableCell>{row.nombre}</TableCell>
