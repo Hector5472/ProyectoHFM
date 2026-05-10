@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import Menu from "../components/Menu";
 import InformeColeccion from "../components/InformeColeccion";
 import { useState, type FormEvent } from "react";
@@ -24,13 +24,12 @@ export default function Reports() {
   return (
     <>
       <Menu />
-      <form
-        style={{ marginTop: "20px", marginBottom: "20px", textAlign: "center" }}
-        onSubmit={handleSubmit}
-      >
-        <Button type="submit" variant="contained" color="primary">
-          Informe Colección
-        </Button>
+      <form style={{ marginTop: "20px", marginBottom: "20px", textAlign: "center" }} onSubmit={handleSubmit}>
+        <Tooltip title="Cargar el informe completo de la colección" placement="bottom" arrow>
+          <Button type="submit" variant="contained" color="primary">
+            Informe Colección
+          </Button>
+        </Tooltip>
       </form>
 
       {buttonClicked && (

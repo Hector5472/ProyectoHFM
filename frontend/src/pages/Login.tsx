@@ -1,9 +1,10 @@
-import { Alert, Box, Button, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, TextField, Typography, Tooltip } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/authSlice";
+import { Link } from "react-router-dom";
 
 
 
@@ -52,52 +53,28 @@ export default function Login() {
                 <Typography variant="h4" align="center">
                     Página Login de Héctor Fleitas Martín
                 </Typography>
+
+                {/* En su momento no se hizo manual de uso, en su lugar se muestra la memoria técnica que se entregó */}
+                <Tooltip title="Ver manual de usuario">
+                    <Link to={'/Fleitas_Martín_Héctor_UT2A4.pdf'} target='_blank'>Ayuda</Link> 
+                </Tooltip>
             </header>
 
             <main>
-                <Box
-                    component="form"
-                    onSubmit={handleSubmit}
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 2
-                    }}
-                >
-                    <Typography variant="h5" color="primary" align="center">
-                        Sistema de acceso
-                    </Typography>
+                <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                    <Typography variant="h5" color="primary" align="center">Sistema de acceso</Typography>
                     <LockIcon sx={{ alignSelf: "center" }} />
 
-                    <TextField
-                        label="Usuario"
-                        variant="outlined"
-                        required
-                        fullWidth
-                        value={user}
-                        onChange={(e) => setUser(e.target.value)}
-                    />
+                    <TextField label="Usuario" variant="outlined" required fullWidth value={user} onChange={(e) => setUser(e.target.value)} />
+                    <TextField label="Contraseña" variant="outlined" type="password" required fullWidth value={passwd} onChange={(e) => setPasswd(e.target.value)} />
 
-                    <TextField
-                        label="Contraseña"
-                        variant="outlined"
-                        type="password"
-                        required
-                        fullWidth
-                        value={passwd}
-                        onChange={(e) => setPasswd(e.target.value)}
-                    />
+                    <Tooltip title="Iniciar sesión en el sistema" placement="top" arrow>
+                        <Button variant="contained" fullWidth type="submit">
+                            Acceder
+                        </Button>
+                    </Tooltip>
 
-                    <Button variant="contained" fullWidth type="submit">
-                        Acceder
-                    </Button>
-
-
-                    {alerta.tipo && (
-                        <Alert severity={alerta.tipo}>
-                            {alerta.mensaje}
-                        </Alert>
-                    )}
+                    {alerta.tipo && <Alert severity={alerta.tipo}>{alerta.mensaje}</Alert>}
                 </Box>
             </main>
         </>

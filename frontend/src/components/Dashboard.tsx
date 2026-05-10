@@ -11,6 +11,7 @@ import {
     TableRow,
     Paper
 } from "@mui/material";
+import { Tooltip } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/index";
@@ -86,7 +87,7 @@ export default function Dashboard() {
     return (
         <Box sx={{ p: 3 }}>
 
-            
+
             <form
                 onSubmit={handleSubmit}
                 style={{
@@ -130,12 +131,14 @@ export default function Dashboard() {
                     required
                 />
 
-                <Button variant="contained" type="submit">
-                    + INSERTAR DATOS
-                </Button>
+                <Tooltip title="Guardar nuevo elemento en la colección" placement="right" arrow>
+                    <Button variant="contained" type="submit">
+                        + INSERTAR DATOS
+                    </Button>
+                </Tooltip>
             </form>
 
-            
+
             <TableContainer component={Paper}>
                 <Table aria-label="tabla coleccion">
                     <TableHead>
@@ -155,14 +158,13 @@ export default function Dashboard() {
                         {tableData.map((row: itemtype) => (
                             <TableRow key={row.id}>
                                 {userData.userRol === "admin" && (
-                                <TableCell>
-                                    <Button
-                                        color="error"
-                                        onClick={() => handleDeleteItem(row)}
-                                    >
-                                        <DeleteForeverIcon />
-                                    </Button>
-                                </TableCell>
+                                    <TableCell>
+                                        <Tooltip title="Eliminar este elemento" placement="left" arrow>
+                                            <Button color="error" onClick={() => handleDeleteItem(row)}>
+                                                <DeleteForeverIcon />
+                                            </Button>
+                                        </Tooltip>
+                                    </TableCell>
                                 )}
 
                                 <TableCell>{row.id}</TableCell>
