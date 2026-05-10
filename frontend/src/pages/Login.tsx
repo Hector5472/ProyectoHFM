@@ -56,7 +56,7 @@ export default function Login() {
 
                 {/* En su momento no se hizo manual de uso, en su lugar se muestra la memoria técnica que se entregó */}
                 <Tooltip title="Ver manual de usuario">
-                    <Link to={'/Fleitas_Martín_Héctor_UT2A4.pdf'} target='_blank'>Ayuda</Link> 
+                    <Link to={'/ManualdeUsuario.pdf'} target='_blank'>Ayuda</Link> 
                 </Tooltip>
             </header>
 
